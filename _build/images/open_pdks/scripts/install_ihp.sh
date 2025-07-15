@@ -11,10 +11,10 @@ PDK="ihp-sg13g2"
 
 #FIXME don't do a shallow clone until we work on the dev branch
 #git clone --depth=1 https://github.com/IHP-GmbH/IHP-Open-PDK.git ihp
-git clone https://github.com/IHP-GmbH/IHP-Open-PDK.git ihp
+git clone https://github.com/mole99/IHP-Open-PDK.git ihp
 cd ihp || exit 1
 # for now uses branch "dev" to get the latest releases
-git checkout dev
+git checkout openlane
 git submodule update --init --recursive
 
 # now move to the proper location

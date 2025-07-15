@@ -30,13 +30,15 @@ pip3 install --upgrade --no-cache-dir --break-system-packages --ignore-installed
 	scikit-rf==1.8.0 \
 	siliconcompiler==0.34.1 \
 	spicelib==1.4.4 \
-	spyci==1.0.2
+	spyci==1.0.2 \
+	cocotbext-uart==0.1.2 \
+	cocotbext-spi==0.5.0
 
 #FIXME	klayout-pex==0.2.7 \
 
 echo "[INFO] Install custom OpenLane2 version"
 pip3 install --upgrade --no-cache-dir --break-system-packages --ignore-installed \
-	git+https://github.com/iic-jku/openlane2
+	git+https://github.com/mole99/openlane2@greyhound
 
 echo "[INFO] Installing CharLib"
 pip3 install --upgrade --no-cache-dir --break-system-packages --ignore-installed \

@@ -9,8 +9,9 @@ mkdir build && cd build
 
 ../configure \
     --enable-multilib \
-    --with-multilib-generator="rv64gc-lp64d--;rv32i-ilp32--;rv32e-ilp32e--;rv32imcb-ilp32--" \
-    --prefix="${TOOLS}/$RISCV_GNU_TOOLCHAIN_NAME" 
+    --with-multilib-generator="rv32i-ilp32--;rv32im-ilp32--;rv32imc-ilp32--;rv32imac-ilp32--;rv32imafc-ilp32f--;rv32ima-ilp32--" \
+    --prefix="${TOOLS}/$RISCV_GNU_TOOLCHAIN_NAME" \
+    --with-sim=spike 
 
 make \
  ASFLAGS="-Os -g0" \
@@ -21,3 +22,4 @@ make \
 
 # and we strip the binaries to reduce size
 find "${TOOLS}/$RISCV_GNU_TOOLCHAIN_NAME" -type f -executable -exec strip {} \;
+
