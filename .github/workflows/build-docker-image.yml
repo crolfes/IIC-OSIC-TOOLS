@@ -15,18 +15,18 @@ jobs:
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-
-      - name: Print Folder Tree
-        uses: jaywcjlove/github-action-folder-tree@main
-        with:
-          path: "./"
-          depth: 5
         
       - name: Validate build configuration
         uses: docker/build-push-action@v6
         with:
           call: check
           file: "./_build/Dockerfile"
+
+      - name: Print Folder Tree
+        uses: jaywcjlove/github-action-folder-tree@main
+        with:
+          path: "./"
+          depth: 5
 
       - name: Build and push
         uses: docker/build-push-action@v6
