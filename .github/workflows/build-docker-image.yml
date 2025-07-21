@@ -3,6 +3,10 @@ name: ci-docker-build
 on: 
   workflow_dispatch:
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   docker_build:
     runs-on: ubuntu-latest
@@ -12,6 +16,13 @@ jobs:
     #    with:
     #      username: ${{ secrets.DOCKERHUB_USERNAME }}
     #      password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: repo checkout
         uses: actions/checkout@v2
@@ -31,6 +42,12 @@ jobs:
           path: "./"
           depth: 5
 
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -39,4 +56,11 @@ jobs:
           context: "./_build/" 
           file: "./_build/Dockerfile"
           sbom: true
+          
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
           
