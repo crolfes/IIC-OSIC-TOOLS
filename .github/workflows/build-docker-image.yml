@@ -20,7 +20,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           call: check
-          context: _build
+          context: ../_build
           file: _build/Dockerfile
 
       - name: Build and push
