@@ -19,7 +19,8 @@ jobs:
       - name: Print Folder Tree
         uses: jaywcjlove/github-action-folder-tree@main
         with:
-          depth: 2
+          path: "./"
+          depth: 5
         
       - name: Validate build configuration
         uses: docker/build-push-action@v6
