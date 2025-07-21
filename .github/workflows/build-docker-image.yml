@@ -20,13 +20,13 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           call: check
-          context: ./_build
+          context: ../_build
 
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
           tags: user/app:latest
-          context: ./_build 
+          context: ../_build 
           sbom: true
           
